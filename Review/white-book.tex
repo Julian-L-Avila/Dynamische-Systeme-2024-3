@@ -1,0 +1,96 @@
+\documentclass[journal, table]{IEEEtran}
+\usepackage[english, spanish]{babel}
+\usepackage[sorting=none]{biblatex}
+\bibliography{ref.bib}
+\usepackage{amsmath, amsfonts, amsthm}
+\usepackage{hyperref, url}
+\usepackage{graphicx}
+\usepackage{fancyhdr, last page}
+\usepackage{siunitx}
+\usepackage{anyfontsize}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage[affil-sl]{authblk}
+\usepackage[spanish]{cleveref}
+\AtBeginDocument{\decimalpoint}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Review Control White Book - JLAM}
+}
+\urlstyle{same}
+\sisetup{separate-uncertainty}
+
+\begin{document}
+
+\title{\textbf{El Control Automático} \\
+    \small{Reseña de los Capítulos 2 y 3 del Libro blanco del control automático
+\cite{de-automatica-2009}} \\ \today}
+
+\author[*]{Julian L. Avila
+    \thanks{Julian Avila: 20212107030}}
+
+\affil[*]{Programa Académico de Física\\
+    Universidad Distrital Francisco José de Caldas}
+
+\markboth{}
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+
+\maketitle
+
+\selectlanguage{english}
+\begin{abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Digital design, logic gates, boolean algebra
+\end{IEEEkeywords}
+
+\selectlanguage{spanish}
+\begin{abstract}
+\end{abstract}
+\begin{IEEEkeywords}
+diseño digital, compuertas lógicas, álgebra booleana
+\end{IEEEkeywords}
+
+\tableofcontents
+
+\section{El Control Automático}%
+\label{sec:El Control Automático}
+
+El control automático es un concepto fundamental en la ingeniería, presente en
+casi todas las situaciones cotidianas. Se enfoca en diseñar sistemas que operen
+de manera autónoma y prácticamente instantánea. Un sistema de control automático
+toma decisiones basadas en algoritmos, que definen las acciones necesarias para
+alcanzar objetivos específicos.
+La electrónica actúa como el soporte físico de estos algoritmos, permitiendo su
+implementación y ejecución.
+
+Un ejemplo común es el control de velocidad de un coche. Aquí, el sistema regula
+automáticamente la velocidad del vehículo, ajustando la aceleración o el frenado
+según sea necesario para mantener una velocidad predefinida, sin intervención
+directa del conductor.
+
+\subsection{La realimentación}%
+\label{sec:La realimentación}
+
+La realimentación es un proceso clave en el control automático, ya que consiste
+en utilizar la medida de la variable a controlar para tomar decisiones más
+precisas.
+Esto permite corregir errores del modelo y mejorar la precisión en la
+consecución de los objetivos.
+Sin la realimentación, en muchos casos no sería posible obtener resultados
+cercanos al objetivo.
+
+Sin embargo, la realimentación también implica desafíos, como la necesidad de
+estimar o medir con precisión las variables involucradas.
+Un problema crítico es que la información estimada puede no ser fiable o estar
+corrupta, lo que afecta la eficacia del control.
+Para mitigar este riesgo, es esencial contar con redundancia en las mediciones,
+asegurando así la fiabilidad de los datos utilizados para la toma de decisiones.
+
+\printbibliography
+\end{document}
+
