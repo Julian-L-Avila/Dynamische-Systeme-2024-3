@@ -27,7 +27,7 @@
 
 \title{\textbf{El Control Automático} \\
     \small{Reseña de los Capítulos 2 y 3 del Libro blanco del control automático
-\cite{de-automatica-2009}} \\ \today}
+    (CEA, 2009) \cite{de-automatica-2009}} \\ \today}
 
 \author[*]{Julian L. Avila
     \thanks{Julian Avila: 20212107030}}
@@ -42,17 +42,47 @@
 
 \selectlanguage{english}
 \begin{abstract}
+A review of Chapters Two and Three of the White Paper on Automatic Control
+(CEA, 2009) is provided, highlighting their essential role in the efficiency
+and safety of complex systems in sectors such as transportation, robotics,
+and power generation.
+The importance of feedback in adjusting and improving system performance
+through continuous measurements is emphasised, despite the challenges related
+to precision.
+It is concluded that feedback is fundamental to the effectiveness and
+adaptability of control systems, playing a crucial role in the design and
+optimisation of advanced technologies.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
-Digital design, logic gates, boolean algebra
+
+Automatic control, Feedback, System efficiency, Continuous measurement,
+Advanced technologies
+
 \end{IEEEkeywords}
 
 \selectlanguage{spanish}
 \begin{abstract}
+
+Se presenta una reseña del capítulo dos y tres del Libro Blanco del Control
+Automático (CEA, 2009), destacando su rol esencial en la eficiencia y seguridad
+de sistemas complejos en sectores como el transporte, la robótica y la
+generación de energía.
+Se subraya la importancia de la realimentación para ajustar y mejorar el
+rendimiento de estos sistemas mediante mediciones continuas, a pesar de los
+desafíos relacionados con la precisión.
+Se concluye que la realimentación es fundamental para la efectividad y
+adaptabilidad de los sistemas de control, desempeñando un papel crucial en el
+diseño y optimización de tecnologías avanzadas.
+
 \end{abstract}
+
 \begin{IEEEkeywords}
-diseño digital, compuertas lógicas, álgebra booleana
+
+Control automático, Realimentación, Eficiencia de sistemas, Medición continua,
+Tecnologías avanzadas
+
 \end{IEEEkeywords}
 
 \tableofcontents
@@ -74,15 +104,13 @@ según sea necesario para mantener una velocidad predefinida, sin intervención
 directa del conductor.
 
 \subsection{La realimentación}%
-\label{sec:La realimentación}
+\label{sub: realimentación}
 
-La realimentación es un proceso clave en el control automático, ya que consiste
-en utilizar la medida de la variable a controlar para tomar decisiones más
-precisas.
-Esto permite corregir errores del modelo y mejorar la precisión en la
-consecución de los objetivos.
-Sin la realimentación, en muchos casos no sería posible obtener resultados
-cercanos al objetivo.
+La realimentación es esencial en el control automático, ya que utiliza la
+medición continua de la variable a controlar para ajustar las decisiones del
+sistema. Este proceso permite corregir errores y mejorar la precisión en la
+consecución de los objetivos. Sin la realimentación, alcanzar resultados
+cercanos a los objetivos deseados sería a menudo inviable.
 
 Sin embargo, la realimentación también implica desafíos, como la necesidad de
 estimar o medir con precisión las variables involucradas.
@@ -91,6 +119,209 @@ corrupta, lo que afecta la eficacia del control.
 Para mitigar este riesgo, es esencial contar con redundancia en las mediciones,
 asegurando así la fiabilidad de los datos utilizados para la toma de decisiones.
 
+\subsection{Etapas de diseño}%
+\label{sub:Etapas de diseño}
+
+El proceso de diseño de un sistema de control sigue una serie de pasos
+estructurados para cumplir con las demandas del proyecto.
+Según Skogestad y Postlethwaite \cite{skogestad-1996}, comienza con el estudio y modelado del sistema, aunque es
+importante que los modelos no sean excesivamente complejos para ser utilizables.
+Después de analizar el modelo, se determina qué variables se controlarán,
+medirán y manipularán.
+A partir de ahí, se selecciona la configuración del control y se elige el tipo
+de controlador, definiendo también las especificaciones que el sistema debe
+satisfacer.
+
+Una vez diseñado el controlador, el siguiente paso es analizar y simular el
+sistema controlado.
+Este ciclo de diseño puede repetirse varias veces para optimizar el rendimiento.
+La selección del hardware y software, como microcontroladores, es crucial,
+pero es el algoritmo de control lo que realmente determina la eficacia del
+sistema.
+Al finalizar, el sistema se valida, y el ingeniero de control puede sugerir
+modificaciones para alcanzar los objetivos de manera más efectiva.
+
+Un ejemplo de la importancia crítica del control se observa en sistemas de
+vuelo de aeronaves, donde un fallo en el diseño del control, como una respuesta
+inadecuada a turbulencias, podría poner en riesgo la misión completa y la
+seguridad del vuelo.
+En estos casos, el control no solo es un componente, sino la pieza clave que
+asegura el funcionamiento seguro y eficiente del sistema.
+
+\subsection{Beneficios}%
+\label{sub:Beneficios}
+
+El control automático proporciona beneficios clave, como lograr objetivos con
+un notable ahorro energético, siendo vital en sistemas de generación de energía.
+Un diseño de control eficiente maximiza la producción y reduce costos, lo cual
+es fundamental para mantener la competitividad en el mercado.
+
+Además, para mantenerse competitivos en el desarrollo de nuevas tecnologías,
+es necesario diseñar equipos cada vez más complejos y capaces de mejorar las
+prestaciones de los existentes.
+Un mal diseño de control, sin embargo, puede tener consecuencias graves,
+lo que subraya la importancia de contar con profesionales capacitados en el área.
+
+La capacidad de optimizar el rendimiento mientras se reducen los costos es
+clave en la industria.
+Sin un control adecuado, los sistemas pueden volverse ineficientes o incluso
+fallar, lo que podría tener un impacto negativo en la competitividad y en la
+seguridad de las operaciones.
+
+\subsection{Comunidad}%
+\label{sub:Comunidad}
+
+La comunidad de control automático tiene sus raíces en investigaciones
+inicialmente clasificadas debido a su conexión militar.
+A medida que los investigadores reconocieron los beneficios de compartir
+conocimientos, surgieron instituciones clave como el IFAC (International
+Federation of Automatic Control), fundada en 1952-1953, que agrupa a
+organizaciones de 48 países y organiza el Congreso Mundial del Control
+Automático cada tres años.
+El IEEE (Institute of Electrical and Electronic Engineers) es una institución
+más general que incluye disciplinas relacionadas con la electricidad y la
+electrónica, mientras que la ISA (International Society of Automation), fundada
+en 1945, ha crecido hasta convertirse en una sociedad global con más de 30,000
+miembros dedicados a la automatización.
+
+\subsection{El ingeniero de control automático}%
+\label{sub:El ingeniero de control automático}
+
+La ingeniería de control automático se centra en estudiar las características
+dinámicas de los sistemas a través de modelos dinámicos.
+A medida que la complejidad de los sistemas aumenta, también lo hacen los
+requisitos, como el desarrollo de productos competitivos, la reducción de
+costos de producción y la seguridad en la operación, donde los sistemas de
+monitoreo juegan un papel crucial.
+El ingeniero de control automático debe poseer conocimientos multidisciplinarios
+para manejar estas demandas.
+
+Entre los perfiles profesionales en la industria, el más tradicional se encarga
+de desarrollar algoritmos de control, abstraer los rasgos más significativos
+del problema y aplicar teoría y métodos de control para analizar modelos.
+Además, diseña algoritmos que aseguren el comportamiento deseado del sistema en
+lazo cerrado.
+Otro aspecto importante de su rol incluye el diseño de procesos de producción,
+destacando la importancia de una intervención integral en el control automático.
+
+\subsection{Las nuevas tecnologías}%
+\label{sub:Las nuevas tecnologías}
+
+La integración de las tecnologías de la triple C (control, computación y
+comunicación) ha permitido que los desarrollos en sistemas de control sean
+extremadamente sofisticados.
+Estas nuevas tecnologías ofrecen oportunidades para avanzar en el desarrollo de
+algoritmos de control avanzados, que incluyen modelado e identificación de la
+dinámica de sistemas complejos con incertidumbre, así como el diseño de
+controladores robustos, óptimos y adaptativos capaces de reconfigurarse en caso
+de fallos.
+Además, facilitan la aplicación y comunicación en sistemas complejos a gran
+escala, y permiten la implementación de sistemas empotrados (embedded control
+systems) que se integran directamente con los procesos que se controlan.
+
+Las nuevas oportunidades funcionales en control automático están marcadas por
+el desarrollo de estructuras de control distribuido, asíncrono y en red.
+Estos sistemas utilizan múltiples unidades de cálculo interconectadas a través
+de redes de comunicación, requiriendo nuevos formalismos para garantizar la
+estabilidad, el rendimiento y la robustez del conjunto.
+La integración de la información y la coordinación al más alto nivel permiten
+un funcionamiento autónomo más eficiente.
+
+La implementación automática de algoritmos de control, junto con la verificación
+y validación integral, es otra área de avance.
+La computación impacta significativamente al permitir que estos sistemas
+software interactúen con procesos físicos y mejoren sus prestaciones y robustez
+mediante algoritmos de respuesta.
+Un área emergente es el desarrollo de sistemas de control capaces de detección y
+diagnóstico de fallos en tiempo real, supervisando rápidamente la ejecución del
+software y ajustando los algoritmos para mantener las prestaciones deseadas,
+mediante un proceso de auto-reconfiguración.
+
+\section{Ejemplos de Aplicación}%
+\label{sec:Ejemplos de Aplicación}
+
+El control automático es fundamental en numerosos sectores, mejorando la calidad
+y eficiencia de diversos sistemas complejos. En el transporte, por ejemplo,
+los sistemas de control automático han transformado la automoción, con un aumento
+en el número de sensores en los vehículos que forman parte de la realimentación
+para regular parámetros esenciales.
+Estos avances permiten una operación más segura y eficiente.
+En el ámbito aeronáutico y aeroespacial, los sistemas de control de vuelo son
+cruciales tanto en aeronaves tradicionales como en modernos cazas militares,
+permitiendo una operación autónoma completa y segura mediante estructuras
+jerárquicas avanzadas.
+Los sistemas ferroviarios, como el Automatic Train Control, y las innovaciones
+como la levitación magnética, también dependen del control automático para
+garantizar la seguridad y la eficiencia operativa.
+
+En la robótica y mecatrónica, el control automático ha facilitado el desarrollo
+de manipuladores y máquinas-herramienta con capacidades avanzadas, como alta
+precisión y aceleración.
+Estos sistemas han permitido avances significativos en la miniaturización y en
+la nanotecnología.
+Los robots móviles e inteligentes, que ahora pueden operar de forma autónoma en
+tierra, mar y aire, también se benefician de estos avances, realizando tareas
+complejas como la auto-localización y la interacción con humanos.
+Esta evolución en la robótica demuestra la importancia del control automático
+para la innovación tecnológica.
+
+Las grandes instalaciones, como las plantas de producción industrial y las
+centrales de generación de energía, dependen del control automático para
+mantener un funcionamiento eficiente.
+Estos sistemas gestionan numerosos lazos de control y supervisión, optimizando
+tanto el rendimiento de las calderas y turbinas en las centrales térmicas como
+el control de variables críticas en las plantas industriales.
+Los centros científicos, como los laboratorios de física de partículas y los
+grandes telescopios, también utilizan el control automático para integrar y
+coordinar sus operaciones a gran escala, asegurando una gestión precisa y
+eficiente de los experimentos y datos científicos.
+
+Además, el control automático se ha adaptado a las redes de comunicación,
+donde la tecnología digital ha permitido la implementación de leyes de control
+en entornos distribuidos.
+Esto incluye la gestión de los desafíos asociados con los tiempos de retardo en
+la comunicación y la sincronización de datos en tiempo real.
+En el ámbito de los microsistemas y sistemas moleculares, el control automático
+es esencial para la precisión en aplicaciones avanzadas, como los sistemas
+microelectromecánicos (MEMS) y la biotecnología.
+Estos sistemas permiten una modelización y control precisos a nivel molecular,
+mejorando la capacidad para gestionar procesos complejos.
+En economía y econometría, el control automático se aplica a modelos económicos,
+destacando su utilidad en la gestión de sistemas económicos globales
+interconectados.
+
+\section{Conclusiones}%
+\label{sec:Conclusiones}
+
+\subsection{Conclusiones del autor}%
+\label{sub:Conclusiones del autor}
+
+El control automático es esencial para el funcionamiento eficiente y seguro de
+sistemas complejos en diversos sectores, desde el transporte hasta la robótica.
+Destaca la importancia de la realimentación para ajustar y mejorar el
+rendimiento de estos sistemas, aunque reconoce los desafíos asociados con la
+precisión de las mediciones.
+El proceso de diseño de control debe ser meticuloso y puede ofrecer beneficios
+significativos en términos de ahorro energético y reducción de costos.
+Además, las nuevas tecnologías están revolucionando el campo, permitiendo
+desarrollos más sofisticados y robustos en el control automático.
+
+\subsection{Conclusiones propias}%
+\label{sub:Conclusiones propias}
+
+El control automático es fundamental para la estabilidad y eficiencia de sistemas
+dinámicos complejos.
+La realimentación, al proporcionar ajustes basados en mediciones continuas,
+es crucial para mantener el sistema dentro de parámetros operativos deseables,
+aunque su implementación precisa es un desafío técnico importante.
+Los avances tecnológicos actuales, como el desarrollo de algoritmos más robustos
+y la integración de sistemas embebidos, permiten una mejora significativa en la
+capacidad de los sistemas de control para manejar la incertidumbre y adaptarse a
+condiciones cambiantes.
+Estos avances no solo optimizan el rendimiento y reducen costos, sino que
+también promueven una mayor precisión en el control de sistemas físicos
+complejos, consolidando el papel del control automático en el avance de la
+tecnología y la ingeniería moderna.
+
 \printbibliography
 \end{document}
-
