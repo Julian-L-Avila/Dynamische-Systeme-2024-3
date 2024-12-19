@@ -14,8 +14,19 @@ set yrange[0:250]
 
 heaviside(x) = (x >= 0) ? 1 : 0
 
-ffd(x) = -61944176908382505.0 * heaviside(x - 206.91) * (exp((15166663393542144.0 / 21908345273226025.0) - (8796093022208.0 * x / 2629001432787123.0)) - 1.0) / 281474976710656.0
+A   = 110.0
+b   = 170.0
+Kp  = 2.0
+Tp  = 303.0
+Td  = 30.0
+Kpm = 2.000635678404079
+Tpm = 298.8828592591657
+Tdm = 36.91
+O   = 20.0
 
-#Plot 1
-set tit "Primer Orden con Delay"
-p data u 1:2 tit "data" ps 1, ffd(x) + 20.0 tit 'matlab' lw 2
+HandFOD(x) = A * Kp * heaviside(x - (Td + b)) * (1 - exp(-(x - (Td + b)) / Tp)) + O
+MatlabFOD(x) = A * Kpm * heaviside(x - (Tdm + b)) * (1 - exp(-(x - (Tdm + b)) / Tpm)) + O
+
+#Plot 1st Order
+set tit "Modelo de Primer Orden con Delay"
+p data u 1:2 tit 'data', HandFOD(x) tit '$H$' dt 2 lw 2, MatlabFOD(x) tit '$M$' dt 1 lw 2
