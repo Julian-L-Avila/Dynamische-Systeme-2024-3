@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cmath>
 #include <fstream>
 #include <string>
@@ -22,8 +23,6 @@ void DataFile(const std::string& inputFileName, const std::string& outputFileNam
   std::ifstream dataFile(inputFileName);
   std::ofstream outFile(outputFileName);
 
-  if (!dataFile || !outFile) return;
-
   double t, yplant;
   while (dataFile >> t >> yplant) {
     double ymodelH = OutputFunctionFirstOrder(t, amplitude, initialt, Kp, Tp, Td, offset);
@@ -34,7 +33,7 @@ void DataFile(const std::string& inputFileName, const std::string& outputFileNam
 }
 
 int main() {
-  const std::string inputFileName = "./Data/Electric-10.csv";
+  const std::string inputFileName = "./Data/Electric-10.dat";
   const std::string outputFileName = "./Data/error.dat";
 
   const double amplitude = 110.0;
