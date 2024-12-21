@@ -1,55 +1,76 @@
 set term tikz standalone header "\\usepackage{siunitx}"
 set output 'fit-plots.tex'
 
+# Grid and legend setup
 set grid
-set key l t
+set key l t spacing 1.1
 
+# Axis labels
 set xlabel '$t \, [\si{s}]$'
 set ylabel '$T \, [\si{C}]$'
 
+# Data files
 data = '../Data/electric-10.dat'
 errorData = '../Data/error.dat'
 
-set xrange[0:1200]
-set yrange[0:250]
+# Range settings
+set xrange [0:1200]
+set yrange [0:250]
 
-heaviside(x) = (x >= 0) ? 1 : 0
+# Heaviside function
+heaviside(x) = (x >= 0)
 
-A   = 110.0
-b   = 170.0
-Kp  = 2.0
-Tp  = 303.0
-Td  = 30.0
+# Model parameters
+A = 110.0
+b = 170.0
+Kp = 2.0
+Tp = 303.0
+Td = 30.0
 Kpm = 2.000635678404079
 Tpm = 298.8828592591657
 Tdm = 36.91
-O   = 20.0
+O = 20.0
 
-OutputFOD(amplitude, tOn, offset, kConstant, tPole, tDelay, x) = amplitude * kConstant * heaviside(x - (tDelay + tOn)) * (1.0 - exp(-(x - (tDelay + tOn)) / tPole)) + offset
+# First-Order Delay Model Output Function
+OutputFOD(amplitude, tOn, offset, kConstant, tPole, tDelay, x) = \
+  amplitude * kConstant * heaviside(x - (tDelay + tOn)) * (1.0 - exp(-(x - (tDelay + tOn)) / tPole)) + offset
 
 HandFOD(x) = OutputFOD(A, b, O, Kp, Tp, Td, x)
 MatlabFOD(x) = OutputFOD(A, b, O, Kpm, Tpm, Tdm, x)
 
-#Plot 1st Order
+# Plotting First-Order Model with Delay
 set tit "Modelo de Primer Orden con Delay"
-p data u 1:2 tit 'data', HandFOD(x) tit '$H_{f}$' dt 2 lw 2, MatlabFOD(x) tit '$M_{f}$' dt 1 lw 2
+plot data u 1:2 title 'Data' with linespoints, \
+  HandFOD(x) title '$H_{f}$' with lines dt 2 lw 2, \
+  MatlabFOD(x) title '$M_{f}$' with lines lw 2
 
+# Second-Order Delay Model parameters
 Kpm = 1.989015963633353
 Tp1m = 25.57774292268281
 Tp2m = 290.5659847649038
 Tdm = 14.49
 
-OutputSOD(amplitude, tOn, offset, kConstant, tPole1, tPole2, tDelay, x) = amplitude * kConstant * heaviside(x - (tDelay + tOn)) * (1.0 - tPole1 * exp(-(x - (tDelay + tOn)) / tPole1) / (tPole1 - tPole2) + tPole2 * exp(-(x - (tDelay + tOn)) / tPole2) / (tPole1 - tPole2)) + offset
+# Second-Order Delay Model Output Function
+OutputSOD(amplitude, tOn, offset, kConstant, tPole1, tPole2, tDelay, x) = \
+  amplitude * kConstant * heaviside(x - (tDelay + tOn)) * (1.0 - tPole1 * exp(-(x - (tDelay + tOn)) / tPole1) / (tPole1 - tPole2) + tPole2 * exp(-(x - (tDelay + tOn)) / tPole2) / (tPole1 - tPole2)) + offset
 
 MatlabSOD(x) = OutputSOD(A, b, O, Kpm, Tp1m, Tp2m, Tdm, x)
 
-#Plot 2nd Order
+# Plotting Second-Order Model with Delay
 set tit "Modelo de Segundo Orden con Delay"
-p data u 1:2 tit 'data', MatlabSOD(x) tit '$M_{s}$' lc 6 dt 1 lw 2
+plot data u 1:2 title 'Data' with linespoints, \
+  MatlabSOD(x) title '$M_{s}$' lc 6 lw 2
 
+# Error plot settings
 set auto y
 set ylabel 'Error'
+set key L
 
-#Plot Error
+# Plot Error Analysis
 set tit "Numerical Integral EAP"
-p errorData u 1:2 tit ' $H_{f}$' w lp lc 2 lw 2, '' u 1:3 tit '$M_{f}$' w lp lc 3 lw 2, '' u 1:6 tit '$M_{s}$' w lp lc 6 lw 2
+plot errorData u 1:2 title '$H_{f}$' with linespoints lc 2 lw 2, \
+  '' u 1:3 title '$M_{f}$' with linespoints lc 3 lw 2, \
+  '' u 1:4 title '$H_{s_1}$' with linespoints lc 4 lw 2, \
+  '' u 1:5 title '$H_{s_2}$' with linespoints lc 5 lw 2, \
+  '' u 1:6 title '$M_{s}$' with linespoints lc 6 lw 2
+
