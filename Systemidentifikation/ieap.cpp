@@ -2,9 +2,10 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <string_view>
 #include <vector>
-#include <string>
+#include <algorithm>
 
 class Model {
   public:
@@ -21,8 +22,8 @@ class Model {
       is_second_order_(is_second_order) {}
 
     double Output(double t) const {
-      const double time_factor = t - (td_ + initial_time_);
-      const double response = is_second_order_ ? SecondOrderResponse(time_factor) : FirstOrderResponse(time_factor);
+      double time_factor = t - (td_ + initial_time_);
+      double response = is_second_order_ ? SecondOrderResponse(time_factor) : FirstOrderResponse(time_factor);
       return amplitude_ * kp_ * Heaviside(time_factor) * response + offset_;
     }
 
@@ -45,8 +46,59 @@ class Model {
     const bool is_second_order_;
 };
 
-double EAP(double plant, double model) { return std::abs(model - plant); }
-double EAC(double plant, double model) { return (model - plant) * (model - plant); }
+double ComputeEAP(double plant, double model) {
+  return std::abs(model - plant);
+}
+
+double ComputeEAC(double plant, double model) {
+  return (model - plant) * (model - plant);
+}
+
+double ComputePEP(double model, double model_opt) {
+  return 100.0 * (model - model_opt) / model_opt;
+}
+
+std::vector<double> CalculateErrorMetrics(const std::vector<Model>& models, double t, double y_plant, std::vector<double>& eap, std::vector<double>& eac) {
+  std::vector<double> outputs(models.size());
+  for (size_t i = 0; i < models.size(); ++i) {
+    outputs[i] = models[i].Output(t);
+    eap[i] += ComputeEAP(y_plant, outputs[i]);
+    eac[i] += ComputeEAC(y_plant, outputs[i]);
+  }
+  return outputs;
+}
+
+void WriteErrorData(std::ofstream& out_file, double t, const std::vector<double>& eap) {
+  out_file << t;
+  for (const auto& value : eap) {
+    out_file << '\t' << value * 10.0;
+  }
+  out_file << '\n';
+}
+
+int FindMinErrorIndex(const std::vector<double>& eap) {
+  return std::distance(eap.begin(), std::min_element(eap.begin(), eap.end()));
+}
+
+std::vector<double> ComputePEPForAll(const std::vector<double>& eap, int min_index) {
+  std::vector<double> pep(eap.size(), 0.0);
+  for (size_t i = 0; i < eap.size(); ++i) {
+    if (i != static_cast<size_t>(min_index)) {
+      pep[i] = ComputePEP(eap[i], eap[min_index]);
+    }
+  }
+  return pep;
+}
+
+void WritePerformanceData(const std::vector<Model>& models, const std::vector<double>& eap, const std::vector<double>& eac, const std::vector<double>& pep) {
+  std::ofstream performance_file("./Data/performance.dat");
+  performance_file << std::fixed << std::setprecision(15);
+  performance_file << "Model\tIEAP\tIEAC\tPEP\n";
+  for (size_t i = 0; i < models.size(); ++i) {
+    performance_file << models[i].Name() << '\t' << eap[i] * 10.0 << '\t'
+      << eac[i] * 10.0 << '\t' << pep[i] << '\n';
+  }
+}
 
 void ProcessData(std::string_view input_file, std::string_view output_file, const std::vector<Model>& models) {
   std::ifstream data_file(input_file.data());
@@ -59,40 +111,28 @@ void ProcessData(std::string_view input_file, std::string_view output_file, cons
   std::vector<double> eap(models.size(), 0.0);
   std::vector<double> eac(models.size(), 0.0);
 
-  auto integrate_and_write = [&](double current_t, double y_plant) {
-    out_file << current_t;
-    for (size_t i = 0; i < models.size(); ++i) {
-      const double output = models[i].Output(current_t);
-      eap[i] += EAP(y_plant, output);
-      eac[i] += EAC(y_plant, output);
-      out_file << '\t' << eap[i] * 10.0;
-    }
-    out_file << '\n';
-  };
-
   while (data_file >> t >> y_plant) {
-    integrate_and_write(t, y_plant - 20.0);
+    auto outputs = CalculateErrorMetrics(models, t, y_plant, eap, eac);
+    WriteErrorData(out_file, t, eap);
   }
 
-  std::cout << std::fixed << std::setprecision(15);
-  for (size_t i = 0; i < models.size(); ++i) {
-    std::cout << models[i].Name() << ":\tIEAP = " << eap[i] * 10.0 << '\t'
-      << "IEAC = " << eac[i] * 10.0 << '\n';
-  }
+  int min_index = FindMinErrorIndex(eap);
+  auto pep = ComputePEPForAll(eap, min_index);
+  WritePerformanceData(models, eap, eac, pep);
 }
 
 int main() {
   constexpr std::string_view input_file = "./Data/electric-10.dat";
   constexpr std::string_view output_file = "./Data/error.dat";
 
-  constexpr double amplitude = 110.0, initial_time = 170.0, offset = 0.0;
+  constexpr double amplitude = 110.0, initial_time = 170.0, offset = 20.0;
 
   std::vector<Model> models = {
-    {amplitude, initial_time, 2.0, 303.0, 0.0, 30.0, offset, "Model Hf"},
-    {amplitude, initial_time, 2.000635678404079, 298.8828592591657, 0.0, 36.91, offset, "Model Mf"},
-    {amplitude, initial_time, 1.989015963633353, 25.0, 290.5659847649038, 14.49, offset, "Model Hs1", true},
-    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.0, 14.49, offset, "Model Hs2", true},
-    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.5659847649038, 14.49, offset, "Model Ms", true}
+    {amplitude, initial_time, 2.0, 303.0, 0.0, 30.0, offset, "Hf"},
+    {amplitude, initial_time, 2.000635678404079, 298.8828592591657, 0.0, 36.91, offset, "Mf"},
+    {amplitude, initial_time, 1.989015963633353, 25.0, 290.5659847649038, 14.49, offset, "Hs1", true},
+    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.0, 14.49, offset, "Hs2", true},
+    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.5659847649038, 14.49, offset, "Ms", true}
   };
 
   ProcessData(input_file, output_file, models);
