@@ -73,8 +73,8 @@ MatlabSOD(x) = OutputSOD(A, b, O, Kpm, Tp1m, Tp2m, Tdm, x)
 # Plotting Second-Order Model with Delay
 set tit "Modelo de Segundo Orden con Delay"
 plot data u 1:2 title 'Data' with linespoints, \
-  HandSOD1(x) title '$H_{s_1}$' lc 4 lw 2, \
-  HandSOD2(x) title '$H_{s_2}$' lc 5 lw 2, \
+  HandSOD1(x) title '$H_{s_1}$' dt 2 lc 4 lw 2, \
+  HandSOD2(x) title '$H_{s_2}$' dt 2 lc 5 lw 2, \
   MatlabSOD(x) title '$M_{s}$' lc 6 lw 2
 
 # Error plot settings
