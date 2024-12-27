@@ -31,6 +31,10 @@ class Model {
 
     const std::string& Name() const { return name_; }
 
+    void WriteParameters(std::ofstream& file) const {
+      file << name_ << '\t' << kp_ << '\t' << tp1_ << '\t' << tp2_ << '\t' << td_ << '\n';
+    }
+
   private:
     static double Heaviside(double t) { return t >= 0.0 ? 1.0 : 0.0; }
 
@@ -47,6 +51,21 @@ class Model {
     const std::string name_;
     const bool is_second_order_;
 };
+
+void WriteModelParameters(const std::string_view file_path, const std::vector<Model>& models) {
+  std::ofstream param_file(file_path.data());
+  param_file << std::fixed << std::setprecision(3);
+
+  if (!param_file) {
+    std::cerr << "Error: Unable to open file " << file_path << " for writing.\n";
+    return;
+  }
+
+  param_file << "Model\tKp\tTp1\tTp2\tTd\n";
+  for (const auto& model : models) {
+    model.WriteParameters(param_file);
+  }
+}
 
 double ComputeEAP(double plant, double model) {
   return std::abs(model - plant);
@@ -73,7 +92,7 @@ std::vector<double> CalculateErrorMetrics(const std::vector<Model>& models, doub
 void WriteErrorData(std::ofstream& out_file, double t, const std::vector<double>& eap) {
   out_file << t;
   for (const auto& value : eap) {
-    out_file << '\t' << value * 10.0;
+    out_file << '\t' << value;
   }
   out_file << '\n';
 }
@@ -126,6 +145,7 @@ void ProcessData(std::string_view input_file, std::string_view output_file, cons
 int main() {
   constexpr std::string_view input_file = "./Data/electric-10.dat";
   constexpr std::string_view output_file = "./Data/error.dat";
+  constexpr std::string_view parameters_file = "./Data/parameters.dat";
 
   constexpr double amplitude = 110.0, initial_time = 170.0, offset = 20.0;
 
@@ -138,7 +158,9 @@ int main() {
     {kAmplitude, kOnTime, kKpSM, kTp1SM, kTp2SM, kTdSM, kOffset, "Ms", true},
   };
 
+  WriteModelParameters(parameters_file, models);
   ProcessData(input_file, output_file, models);
+
   return 0;
 }
 

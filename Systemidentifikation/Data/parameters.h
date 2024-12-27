@@ -29,9 +29,9 @@ constexpr double kTdS1  = -20.1693;
 
 // Hand 2nd Order (2)
 constexpr double kKpS2  = 2.0;
-constexpr double kTp1S2 = 0.03588458684;
-constexpr double kTp2S2 = 304.6509596;
-constexpr double kTdS2  = 220 - kOnTime;
+constexpr double kTp1S2 = 0.4039819387;
+constexpr double kTp2S2 = 312.9882006;
+constexpr double kTdS2  = 200 - kOnTime;
 
 // MATLAB 2nd Order
 constexpr double kKpSM  = 1.989015963633353;

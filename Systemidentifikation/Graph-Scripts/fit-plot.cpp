@@ -43,16 +43,30 @@ void DefineFunctions(Gnuplot &gp) {
 
 void PlotData(Gnuplot &gp) {
   gp << "set title 'Modelo de Primer Orden con Delay'\n";
-  gp << "plot '" << kDataFile << "' title 'Data' with linespoints lc -1, "
-    "HF1(x) title '$H_{f_1}$' with lines lc 1 dt 2 lw 2, "
-    "HF2(x) title '$H_{f_2}$' with lines lc 2 dt 2 lw 2, "
-    "MF(x) title '$M_{f}$' with lines lc 3 lw 1\n";
+  gp << "plot HF1(x) title '$H_{f_1}$' with lines lc rgb '#0075FF' dt 2 lw 2, "
+    "HF2(x) title '$H_{f_2}$' with lines lc rgb '#FF0A00' dt 2 lw 2, "
+    "MF(x) title '$M_{f}$' with lines lc '#8A00FF' lw 2, "
+    "'"<< kDataFile << "' title 'Data' lc -1 pt 1\n";
 
   gp << "set title 'Modelo de Segundo Orden con Delay'\n";
-  gp << "plot '" << kDataFile << "' title 'Data' with linespoints lc -1, "
-    "HS1(x) title '$H_{s_1}$' with lines lc 4 dt 2 lw 2, "
-    "HS2(x) title '$H_{s_2}$' with lines lc 5 dt 2 lw 2, "
-    "MS(x) title '$M_{s}$' with lines lc 6 lw 1\n";
+  gp << "plot HS1(x) title '$H_{s_1}$' with lines lc rgb '#003D0C' dt 2 lw 2, "
+    "HS2(x) title '$H_{s_2}$' with lines lc rgb '#28A3CC' dt 2 lw 2, "
+    "MS(x) title '$M_{s}$' with lines lc rgb '#FF00F4' lw 2, "
+    "'" << kDataFile << "' title 'Data' lc -1 pt 1\n";
+}
+
+void PlotError(Gnuplot &gp) {
+  gp << "set auto y\n";
+  gp << "set ylabel 'Sumatoria de Error [$10^1$]'\n";
+
+  gp << "set title 'IEAP Numérico'\n";
+  gp << "plot '" << kErrorDataFile << 
+    "' u 1:2 title '$H_{f_1}$' with lines lc rgb '#0075FF' lw 2, "
+    "'' u 1:3 title '$H_{f_2}$' with lines lc rgb '#FF0A00' lw 2, "
+    "'' u 1:4 title '$M_{f}$' with lines lc rgb '#8A00FF' lw 2, "
+    "'' u 1:5 title '$H_{s_1}$' with lines lc '#003D0C' lw 2, "
+    "'' u 1:6 title '$H_{s_2}$' with lines lc '#28A3CC' lw 2, "
+    "'' u 1:7 title '$M_{s}$' with lines lc '#FF00F4' lw 2\n";
 }
 
 int main() {
@@ -60,6 +74,7 @@ int main() {
   ConfigureGnuplot(gp);
   DefineFunctions(gp);
   PlotData(gp);
+  PlotError(gp);
   return 0;
 }
 
