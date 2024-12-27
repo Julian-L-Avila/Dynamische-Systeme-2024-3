@@ -7,6 +7,8 @@
 #include <vector>
 #include <algorithm>
 
+#include "./Data/parameters.h"
+
 class Model {
   public:
     Model(double amplitude, double initial_time, double kp, double tp1, double tp2, double td, double offset,
@@ -95,8 +97,8 @@ void WritePerformanceData(const std::vector<Model>& models, const std::vector<do
   performance_file << std::fixed << std::setprecision(15);
   performance_file << "Model\tIEAP\tIEAC\tPEP\n";
   for (size_t i = 0; i < models.size(); ++i) {
-    performance_file << models[i].Name() << '\t' << eap[i] * 10.0 << '\t'
-      << eac[i] * 10.0 << '\t' << pep[i] << '\n';
+    performance_file << models[i].Name() << '\t' << eap[i] << '\t'
+      << eac[i] << '\t' << pep[i] << '\n';
   }
 }
 
@@ -128,11 +130,12 @@ int main() {
   constexpr double amplitude = 110.0, initial_time = 170.0, offset = 20.0;
 
   std::vector<Model> models = {
-    {amplitude, initial_time, 2.0, 303.0, 0.0, 30.0, offset, "Hf"},
-    {amplitude, initial_time, 2.000635678404079, 298.8828592591657, 0.0, 36.91, offset, "Mf"},
-    {amplitude, initial_time, 1.989015963633353, 25.0, 290.5659847649038, 14.49, offset, "Hs1", true},
-    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.0, 14.49, offset, "Hs2", true},
-    {amplitude, initial_time, 1.989015963633353, 25.57774292268281, 290.5659847649038, 14.49, offset, "Ms", true}
+    {kAmplitude, kOnTime, kKpF1, kTpF1, 0.0, kTdF1, kOffset, "Hf1"},
+    {kAmplitude, kOnTime, kKpF2, kTpF2, 0.0, kTdF2, kOffset, "Hf2"},
+    {kAmplitude, kOnTime, kKpFM, kTpFM, 0.0, kTdFM, kOffset, "Mf"},
+    {kAmplitude, kOnTime, kKpS1, kTp1S1, kTp2S1, kTdS1, kOffset, "Hs1", true},
+    {kAmplitude, kOnTime, kKpS2, kTp1S2, kTp2S2, kTdS2, kOffset, "Hs2", true},
+    {kAmplitude, kOnTime, kKpSM, kTp1SM, kTp2SM, kTdSM, kOffset, "Ms", true},
   };
 
   ProcessData(input_file, output_file, models);
