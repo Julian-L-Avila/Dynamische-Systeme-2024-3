@@ -11,8 +11,8 @@ void ConfigureGnuplot(Gnuplot &gp) {
   gp << "set output '" << kOutputFile << "'\n";
   gp << "set grid\n";
   gp << "set key Left left top spacing 1.1\n";
-  gp << "set xlabel '$t \\, [\\si{s}]$'\n";
-  gp << "set ylabel '$T \\, [\\si{C}]$'\n";
+  gp << "set xlabel '$t \\, [\\si{\\s}]$'\n";
+  gp << "set ylabel '$T \\, [\\si{\\celsius}]$'\n";
   gp << "set xrange [0:1200]\n";
   gp << "set yrange [0:250]\n";
 }
