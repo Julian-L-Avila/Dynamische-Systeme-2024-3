@@ -8,7 +8,7 @@ r_val = 998
 g_val = 9.81
 
 # Unit step function f1(t)
-f1 = 10 * sp.Heaviside(t - 1)
+f1 = 10 * (sp.Heaviside(t - 1) - sp.Heaviside(t - 10))
 
 # Laplace transform of f1(t) (unit step function at t = 1)
 F1 = sp.laplace_transform(f1, t, s)[0]
@@ -37,7 +37,7 @@ import numpy as np
 import pandas as pd
 
 # Define a time range (e.g., from t=0 to t=10)
-time_values = np.linspace(0, 10, 500)
+time_values = np.linspace(0, 50, 500)
 
 # Convert symbolic solutions to numerical functions
 h1_func = sp.lambdify((t, r, g), h1_time, "numpy")
