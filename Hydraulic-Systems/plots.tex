@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[dvipsnames]{xcolor}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+\begin{tikzpicture}
+	\begin{axis}[
+		title={Altura de los Tanques en el Tiempo},
+		width=12cm,
+		height=8cm,
+		xlabel={$t \, [\si{s}]$},
+		ylabel={$h \, [\si{cm}]$},
+		grid=both,
+		grid style=dashed,
+		legend pos=north west,
+		legend style={font=\small},
+		every axis plot/.append style={thick},
+		xmin=0,
+		xmax=10,
+		x tick label style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+		y tick label style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+		ytick scale label code/.code={},
+		xtick distance=2,
+		minor y tick num=1,
+		minor x tick num=1,
+	]
+	\addplot[
+		color=Plum,
+		line width=1.2pt,
+	]
+	table[col sep=tab, x index=0, y index=1] {./response_data.csv};
+	\addlegendentry{$h_1(t)$}
+
+	\addplot[
+		color=Green,
+		line width=1.2pt,
+	]
+	table[col sep=tab, x index=0, y index=2] {./response_data.csv};
+	\addlegendentry{$h_2(t)$}
+
+	\addplot[
+		color=Cyan,
+		line width=1.2pt,
+	]
+	table[col sep=tab, x index=0, y index=3] {./response_data.csv};
+	\addlegendentry{$h_3(t)$}
+	\end{axis}
+	\end{tikzpicture}
+\end{document}
