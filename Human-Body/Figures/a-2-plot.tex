@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		title={Acelaración \( \ddot{x}_2 \)},
+		width=12cm,
+		height=8cm,
+		xlabel={\(t \, [\si{\second}]\)},
+		ylabel={\(\ddot{x}_2 \, [\si{\metre\per\square\second}]\)},
+		grid=both,
+		grid style=dashed,
+		legend style={font=\small},
+		every axis plot/.append style={thick},
+		xmin=0,
+		xmax=5,
+		x tick label style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+		y tick label style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+		ytick scale label code/.code={},
+		ytick distance=3,
+		xtick distance=1,
+		minor y tick num=1,
+		minor x tick num=2,
+	]
+	\addplot[
+		color=Cyan,
+		line width=1.2pt,
+	]
+	table[col sep=tab, x expr=\thisrowno{0}, y expr=\thisrowno{6}]{./Data/system_solution_with_velocities_and_accelerations.csv};
+	\end{axis}
+\end{tikzpicture}
+

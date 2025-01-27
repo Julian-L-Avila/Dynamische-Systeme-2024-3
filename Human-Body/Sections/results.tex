@@ -1,0 +1,130 @@
+Empleando las ecuaciones diferenciales que describen el sistema, se obtuvo la
+respuesta a una entrada \( x_s \) de escalón unitario con amplitud
+\qty{0.01}{\metre}, tiempo de activación \( t = \qty{1}{\second} \) y duración
+de \qty{5}{\second}.
+
+Las \cref{fig:x1,fig:x2,fig:x3,fig:x4} presentan el desplazamiento de cada una
+de las masas del modelo. El mayor pico ocurre en la víscera, mientras que el
+torso inferior exhibe un desplazamiento semejante a un sistema críticamente
+amortiguado.
+
+Las \cref{fig:v1,fig:v2,fig:v3,fig:v4} ilustran las velocidades de las masas.
+Como se deduce de la \cref{fig:x4}, la cabeza y el cuello alcanzan las mayores
+velocidades, resultado de la combinación de un alto \( k_4 \) y un valor medio
+de \( c_4 \).
+
+Las \cref{fig:a1,fig:a2,fig:a3,fig:a4} muestran las aceleraciones de las masas.
+Destacan picos elevados, siendo el más alto en el cuello y la cabeza, con más
+de \qty{24.0}{\metre\per\square\second}. Este valor podría ser incómodo para el
+usuario. Las aceleraciones aumentan desde la base hacia la parte superior del
+cuerpo, lo cual es coherente con la propagación del movimiento.
+
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/x-1-plot.tex}
+  }
+  \caption{Desplazamiento del Torso inferior.}
+  \label{fig:x1}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/x-2-plot.tex}
+  }
+  \caption{Desplazamiento de la Víscera.}
+  \label{fig:x2}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/x-3-plot.tex}
+  }
+  \caption{Desplazamiento del Torso superior.}
+  \label{fig:x3}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/x-4-plot.tex}
+  }
+  \caption{Desplazamiento de la Cabeza y Cuello.}
+  \label{fig:x4}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/v-1-plot.tex}
+  }
+  \caption{Velocidad del Torso inferior.}
+  \label{fig:v1}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/v-2-plot.tex}
+  }
+  \caption{Velocidad de la Víscera.}
+  \label{fig:v2}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/v-3-plot.tex}
+  }
+  \caption{Velocidad del Torso superior.}
+  \label{fig:v3}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/v-4-plot.tex}
+  }
+  \caption{Velocidad de la Cabeza y Cuello.}
+  \label{fig:v4}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/a-1-plot.tex}
+  }
+  \caption{Aceleración del Torso inferior.}
+  \label{fig:a1}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/a-2-plot.tex}
+  }
+  \caption{Aceleración de la Víscera.}
+  \label{fig:a2}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/a-3-plot.tex}
+  }
+  \caption{Aceleración del Torso superior.}
+  \label{fig:a3}
+\end{figure}
+
+\begin{figure}[htbp!]
+  \centering
+  \resizebox{\linewidth}{!}{
+    \input{./Figures/a-4-plot.tex}
+  }
+  \caption{Aceleración de la Cabeza y Cuello.}
+  \label{fig:a4}
+\end{figure}
+

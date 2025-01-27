@@ -1,0 +1,46 @@
+El modelo biomecánico utilizado describe el cuerpo humano como un sistema
+de cuatro masas conectadas entre sí mediante resortes y amortiguadores. Este
+enfoque permite representar de forma simplificada la respuesta dinámica del
+cuerpo frente a las vibraciones transmitidas desde un asiento vehicular. Las
+ecuaciones diferenciales que gobiernan el comportamiento del sistema se
+presentan en las \cref{eq:m1,eq:m2,eq:m3,eq:m4}, donde cada masa modela
+una parte específica del cuerpo humano, tal como se describe a continuación:
+
+\begin{itemize}
+  \item \( m_1 \): Torso inferior.
+  \item \( m_2 \): Víscera.
+  \item \( m_3 \): Torso superior.
+  \item \( m_4 \): Cabeza y el cuello.
+\end{itemize}
+
+\begin{align}
+  m_1 \ddot{x}_1 &= -c_2 \left( \dot{x}_1 - \dot{x}_2 \right) - k_2 \left( x_1
+  - x_2 \right) \label{eq:m1} \\
+    &\quad - c_{31} \left( \dot{x}_1 - \dot{x}_2 \right) + k_{31} \left( x_1
+    - x_3 \right) \nonumber \\
+    &\quad + c_1 \left( \dot{x}_s - \dot{x}_1 \right) + k_1 \left( x_s -
+    x_1 \right) \nonumber \\
+  m_2 \ddot{x}_2 &= c_2 \left( \dot{x}_1 - \dot{x}_2 \right) + k_2 \left( x_1 -
+  x_2 \right) \label{eq:m2} \\
+    &\quad - c_3 \left( \dot{x}_2 - \dot{x}_3 \right) - k_3 \left( x_2 -
+    x_3 \right) \nonumber \\
+  m_3 \ddot{x}_3 &= c_3 \left( \dot{x}_2 - \dot{x}_3 \right) + k_3 \left( x_2 -
+  x_3 \right) \label{eq:m3} \\
+    &\quad + c_{31} \left( \dot{x}_1 - \dot{x}_3 \right) + k_{31} \left( x_1
+    - x_3 \right) \nonumber \\
+    &\quad - c_4 \left( \dot{x}_3 - \dot{x}_4 \right) - k_4 \left( x_3 -
+    x_4 \right) \nonumber \\
+  m_4 \ddot{x}_4 &= c_4 \left( \dot{x}_3 - \dot{x}_4 \right) + k_4 \left( x_3
+  - x_4 \right) \label{eq:m4}
+\end{align}
+
+El desplazamiento del asiento \( x_s \) genera las fuerzas que provocan el
+movimiento en el sistema, afectando las masas a través de resortes y
+amortiguadores, los cuales introducen efectos de rigidez y amortiguamiento,
+respectivamente. Cada ecuación refleja las interacciones entre las masas,
+modeladas por los coeficientes de rigidez (\( k \)) y los coeficientes de
+amortiguamiento (\( c \)), que permiten simular la propagación de vibraciones
+a través del cuerpo humano. Estas ecuaciones son fundamentales para estudiar
+cómo el cuerpo responde a las fuerzas transmitidas por el vehículo en condiciones
+de vibración, y son cruciales para el diseño de sistemas que mejoren la seguridad
+y confort del usuario en un entorno vehicular.

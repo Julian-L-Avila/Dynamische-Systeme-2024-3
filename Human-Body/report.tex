@@ -1,0 +1,73 @@
+\documentclass[journal, table]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[english, spanish]{babel}
+\usepackage[sorting=none]{biblatex}
+\bibliography{./ref.bib}
+
+\usepackage{microtype}
+\usepackage{amsmath, amsfonts, amsthm, amssymb, mathtools}
+\usepackage{hyperref, url}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr, last page}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage[affil-sl]{authblk}
+\usepackage{anyfontsize}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{svg}
+\usepackage{tabularx, ragged2e, booktabs}
+\usepackage{pgfplotstable}
+\usepackage{siunitx}
+\usepackage[spanish]{cleveref}
+\AtBeginDocument{\decimalpoint}
+\graphicspath{{./Images}}
+
+\usepackage[version=4]{mhchem}
+\pgfplotsset{compat=1.18}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  pdftitle={Spectral Lines - JLAB}
+}
+\urlstyle{same}
+\sisetup{separate-uncertainty}
+
+\renewcommand\Authand{, y }
+\renewcommand\Authands{, y }
+
+\begin{document}
+
+\title{Modelo de Wan y Schimmels}
+
+\author[*]{Julian Avila
+  \thanks{Julian Avila: 20212107030}}
+
+\affil[*]{Programa Académico de Física\\
+Universidad Distrital Francisco José de Caldas}
+
+\markboth{}
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+
+\maketitle
+
+\input{./Sections/abstract.tex}
+
+\section{Objetivos}
+\input{./Sections/objectives.tex}
+
+\section{Marco Teórico}
+\input{./Sections/theory.tex}
+
+\section{Resultados y Análisis}
+\input{./Sections/results.tex}
+
+\section{Conclusiones}
+\input{./Sections/conclusions.tex}
+
+\printbibliography
+\end{document}
